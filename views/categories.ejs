@@ -1,0 +1,57 @@
+<div class="flex justify-around">
+    <div class="flex flex-col w-9/12">
+        <div class="flex justify-between  p-6">
+            <h1 class="text-xl font-bold"> Categories management</h1>
+            
+            <a href="#add" class="text-white py-2 main-color px-4 rounded-full ">Add categorie</a>
+
+        </div>
+        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8 rounded border">
+                <div class="overflow-hidden">
+                    <table class="min-w-full text-left text-sm font-light">
+                        <thead class="border-b font-medium dark:border-neutral-500">
+                            <tr>
+                                <th scope="col" class="px-6 py-4">#</th>
+                                <th scope="col" class="px-6 py-4">titre</th>
+                                <th scope="col" class="px-6 py-4">action</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% categories.forEach(category=> { %>
+                                <tr class="border-b dark:border-neutral-500">
+                                    <td class="whitespace-nowrap px-6 py-4 font-medium"><%= category.id %></td>
+                                    <td class="whitespace-nowrap px-6 py-4"><%= category.titre %></td>
+                                    <td class="whitespace-nowrap px-6 py-4">
+                                        <form method="post" action="update">
+                                            <input type="hidden" name="update_id" value="<%= category.id %>">
+
+                                            <button type="submit"
+                                                class="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Edit</button>
+
+                                        </form>
+                                    
+                                    </td>
+                                </tr>
+                                <%}) %>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="add" class="my-96 pt-60 flex justify-around ">
+    <form class="w-6/12 bg-gray-100 p-6" action="/addcategory" method="post">
+        <h1 class="text-xl font-bold"> new categorie</h1>
+        <label for="email" class="pt-2 mb-3 block text-base font-medium text-[#07074D]">
+            Titre:
+          </label>
+          <input name="titre" class="w-full rounded-md  bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <button class="mt-6 hover:shadow-form w-full rounded-md bg-[#878787] py-3 px-8 text-center text-base font-semibold text-white outline-none">
+            Add
+          </button>
+    </form>
+</div>

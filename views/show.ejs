@@ -1,14 +1,88 @@
-<%- include('header') %>
+<div class="flex justify-around ">
+    <div class="w-3/12 bg-dark">
 
-    
+        <div
+            class="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+            <div class="flex items-center justify-between mb-4">
+                <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Categories</h5>
+                <button class="text-white py-1 main-color px-3 rounded-full ">+Category</button>
+
+            </div>
+            <div class="flow-root">
+                <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+                    <% categories.forEach(category=> { %>
+                        <li class="py-3 sm:py-4">
+                            <div class="flex items-center space-x-4">
 
 
-        
+                                <div class="flex-1 min-w-0">
+                                    <a href="" class="text-white py-1 main-color px-24 rounded-full ">
+                                        <%= category.titre %>
+                                    </a>
 
-            <%= post.titre %>
-            
+                                </div>
+
+                            </div>
+                        </li>
+                        <% }) %>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <div class="flex  w-8/12  justify-around">
+
+        <div class="h-fit  w-l bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <div class="flex justify-end">
+                <div x-data="{ open: false }" class="relative">
+                    <button @click="open = !open"
+                        class="flex items-center justify-center px-4 py-2 text-sm font-medium text-white ">
+                        <svg :class="{'transform rotate-180': open, 'transform rotate-0': !open}"
+                            class="w-4 h-4 ml-2 -mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                            fill="black">
+                            <path fill-rule="evenodd" d="M10 12l-6-6h12l-6 6z" />
+                        </svg>
+                    </button>
+                    <ul x-show="open" @click.away="open = false"
+                        class="absolute right-0 w-40 py-2 mt-2 bg-white rounded-md shadow-lg">
+                        <li><a href="/editpost/<%= post.id %>" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Edit</a></li>
+                        <li><a href="" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                            <form action="/deletepost/<%= post.id %>" method="post">
+                                <button class="">delete</button>
+                            </form>
+                        </a></li>
+                    </ul>
+                </div>
+            </div>
+            <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2"></script>
+            <a href="#">
+                <h5 class="mb-2 py-2 px-3 text-l font-bold tracking-tight text-gray-900 dark:text-white">
+                    <%= post.titre %>
+                </h5>
+            </a>
+            <a href="#" class="flex justify-center">
+                <img class="rounded-t-lg w-fit h-fit" src="https://picsum.photos/700" alt="">
+            </a>
+            <div class="p-6">
+                <% postcategories.forEach(pcategory=>{ %>
+                <a href="/posts/category" style="background: darkgray"
+                    class="badge badge-secondary mb-3">#<%= pcategory.titre %></a>
+                <% }) %>
+            </div>
+            <div class="p-5">
+
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                    <%= post.contenu %>
+                </p>
 
 
 
 
-<%- include('footer') %>
+            </div>
+        </div>
+
+
+
+
+    </div>
+</div>
